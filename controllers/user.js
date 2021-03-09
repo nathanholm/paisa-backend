@@ -30,6 +30,8 @@ const register = (req, res) => {
             // Create a new user
             const newUser = new db.User({
                 name: req.body.name,
+                display_name:
+                req.body.displayName,
                 email: req.body.email,
                 password: req.body.password
             });
@@ -72,7 +74,9 @@ const login = async (req, res) => {
             const payload = {
                 id: foundUser.id,
                 email: foundUser.email,
-                name: foundUser.name
+                name: foundUser.name,
+                displayName:
+                foundUser.display_name
             }
 
             jwt.sign(payload, JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
