@@ -1,3 +1,4 @@
+"use strict";
 require("dotenv").config();
 // Database
 const db = require("../models");
@@ -11,7 +12,7 @@ const test = (req, res) => {
 const create = async ( req, res ) => {
   try {
     // Destructure submitted form data
-    const { institutionName, nickname, accountType, accountNumber } = req.body;
+    const { institutionName, nickname, accountType, accountNumber, currency } = req.body;
     
     // Create a new Transaction Account document
     const newTransactionAccount = await new db.TransactionAccount({
@@ -19,6 +20,7 @@ const create = async ( req, res ) => {
       nickname: nickname,
       account_type: accountType,
       account_number: accountNumber,
+      currency: currency,
       belongs_to: req.user._id
     });
     try {

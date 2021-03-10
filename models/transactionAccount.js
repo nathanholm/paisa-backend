@@ -26,6 +26,11 @@ const transactionAccountSchema = new Schema({
     type: Number,
     maxLength: 5
   },
+  currency: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Currency",
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now()
