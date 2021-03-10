@@ -4,6 +4,7 @@ const express = require('express');
 const routes = require('./routes');
 const cors = require('cors');
 const passport = require('passport');
+const morgan = require('morgan');
 require('./config/passport')(passport);
 
 // App Set up
