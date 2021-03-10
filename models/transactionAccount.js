@@ -5,12 +5,16 @@ const transactionAccountSchema = new Schema({
   institution_name: {
     type: String,
     trim: true,
-    required: function () { return !this.nickname }
   },
   nickname: {
     type: String,
     trim: true,
-    required: function () { return !this.institution_name }
+    validate: {
+      validator: function (nickname) {
+          return nickname || this.institution_name
+      },
+      message: 'You must provide a nickname or an Institution name.'
+    }
   },
   account_type: {
     type: String,

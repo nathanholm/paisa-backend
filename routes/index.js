@@ -3,5 +3,3 @@ module.exports = {
   message: require('./message'),
   transactionAccount: require('./transactionAccount')
 }
-
-
