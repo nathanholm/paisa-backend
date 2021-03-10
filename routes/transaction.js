@@ -3,7 +3,8 @@ const ctrl = require('../controllers');
 
 router.get('/')
 router.get(getTransactions);
-router.post(addTransactions);
+router.post(addTransaction);
+router.delete(deleteTransaction)
 
 
 
