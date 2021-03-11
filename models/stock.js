@@ -1,39 +1,31 @@
 "use strict";
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+// Schema class from mongoose
 const { Schema } = mongoose;
 
+// Model
 const StockSchema = new Schema({
-  ticker: {
-    type: String,
-    trim: true,
-    required: true,
-    unique: true
-  },
-  name: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  currency: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Currency",
-    required: true
-  },
-  exchange: {
-    type: String,
-    required: true
-  },
-  date_added: {
+    ticker: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    date_added: {
     type: Date,
     default: Date.now()
-  },
-  belongs_to: {
+    },
+    price: Number,
+    userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
-  },
+  }
 });
 
-const Stock = mongoose.model("Stock", StockSchema);
+// Model
+const Stock = mongoose.model('Stock', StockSchema);
 
 module.exports = Stock;
