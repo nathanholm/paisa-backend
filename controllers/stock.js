@@ -1,15 +1,7 @@
 const db = require('../models');
+const log = require("../middleware/log");
 
-const index = (req, res) => {
-    // Purpose: Fetch all examples from DB and return
-    console.log('=====> Inside GET /stocks');
-
-    db.Stock.find({}, (err, foundStocks) => {
-        if (err) console.log('Error in stocks#index:', err);
-        res.json(foundStocks);
-    });
-}
-
+// Controllers
 const show = (req, res) => {
     // Purpose: Fetch one example from DB and return
     console.log('=====> Inside GET /stocks/:id');
@@ -61,11 +53,32 @@ const destroy = (req, res) => {
     });
 };
 
+const test = (req, res) => {
+    res.json({ message: "Endpoint Valid: Stocks" });
+}
+
+const deleteAll = async (req, res) => {
+  try {
+    const emptyCollection = await db.Stock.deleteMany({});
+    res.json(emptyCollection);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getAll = async (req, res) => {
+  const stocks = await db.Stock.find();
+  
+  console.log(stocks);
+  res.json(stocks);
+}
+
 module.exports = {
-    index,
+    test,
+    getAll,
+    deleteAll,
     show,
     create,
     update,
     destroy,
-};
-
+}

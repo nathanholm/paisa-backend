@@ -10,7 +10,7 @@ const db = require('../models');
 
 // Controllers
 const test = (req, res) => {
-    res.json({ message: 'User endpoint OK! ✅' });
+    res.json({ message: "Endpoint Valid: Users" });
 }
 
 
@@ -30,6 +30,7 @@ const register = (req, res) => {
             // Create a new user
             const newUser = new db.User({
                 name: req.body.name,
+                display_name: req.body.displayName,
                 email: req.body.email,
                 password: req.body.password
             });
@@ -57,7 +58,6 @@ const login = async (req, res) => {
     console.log('===> Inside of /login');
     console.log('===> /login -> req.body');
     console.log(req.body);
-
     const foundUser = await db.User.findOne({ email: req.body.email });
 
     if (foundUser) {
@@ -72,7 +72,9 @@ const login = async (req, res) => {
             const payload = {
                 id: foundUser.id,
                 email: foundUser.email,
-                name: foundUser.name
+                name: foundUser.name,
+                displayName:
+                foundUser.display_name
             }
 
             jwt.sign(payload, JWT_SECRET, { expiresIn: 3600 }, (err, token) => {

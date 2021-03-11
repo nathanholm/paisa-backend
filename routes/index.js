@@ -1,7 +1,8 @@
 module.exports = {
-  example: require('./example'),
-  user: require('./user'),
-  message: require('./message'),
+  user: require("./user"),
+  message: require("./message"),
+  transactionAccount: require("./transactionAccount"),
+  currency: require("./currency"),
+  transaction: require("./transaction"),
+  stock: require("./stock")
 }
-
-
