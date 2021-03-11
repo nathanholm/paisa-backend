@@ -3,10 +3,16 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const CurrencySchema = new Schema({
-  _id: {
+  name: {
     type: String,
-    required: true,
-    unique: true
+    required: true
+  },
+  name_plural: {
+    type: String,
+  },
+  code: {
+    type: String,
+    required: true
   },
   symbol: {
     type: String,
@@ -24,7 +30,7 @@ const CurrencySchema = new Schema({
     type: Number,
     required: true
   },
-  date: {
+  date_added: {
     type: Date,
     default: Date.now()
   }
