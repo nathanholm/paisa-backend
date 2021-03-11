@@ -11,7 +11,7 @@ const test = (req, res) => {
 
 const deleteAll = async (req, res) => {
   try {
-    const emptyCollection = await db.Transaction.deleteMany({});
+    const emptyCollection = await db.Currency.deleteMany({});
     res.json(emptyCollection);
   } catch (error) {
     console.log(error)
@@ -19,10 +19,10 @@ const deleteAll = async (req, res) => {
 }
 
 const getAll = async (req, res) => {
-  const transactions = await db.Transaction.find();
+  const currencies = await db.Currency.find();
   
-  console.log(transactions);
-  res.json(transactions);
+  console.log(currencies);
+  res.json(currencies);
 }
 
 module.exports = {test, getAll, deleteAll}

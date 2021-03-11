@@ -1,3 +1,4 @@
 node_modules
 .env
 .nova
+/api-stock-test.js

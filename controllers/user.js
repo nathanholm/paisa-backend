@@ -10,7 +10,7 @@ const db = require('../models');
 
 // Controllers
 const test = (req, res) => {
-    res.json({ message: 'User endpoint OK! ✅' });
+    res.json({ message: "Endpoint Valid: Users" });
 }
 
 

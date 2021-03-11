@@ -28,6 +28,8 @@ app.use("/api/users", routes.user);
 app.use("/api/messages", routes.message);
 app.use("/api/transaction-accounts", routes.transactionAccount);
 app.use("/api/currencies", routes.currency);
+app.use("/api/transactions", routes.transaction);
+app.use("/api/stocks", routes.stock);
 
 // Server
 const server = app.listen(PORT, () => console.log(chalk`\n{blue ${app.get("title")}} | Running on port ${PORT}`));
