@@ -9,9 +9,9 @@ const test = (req, res) => {
     res.json({ message: "Endpoint Valid: Transaction Accounts" });
 }
 
-const deleteCurrencies = async (req, res) => {
+const deleteAll = async (req, res) => {
   try {
-    const emptyCollection = await db.Currency.remove({});
+    const emptyCollection = await db.Currency.deleteMany({});
     res.json(emptyCollection);
   } catch (error) {
     console.log(error)
@@ -25,4 +25,4 @@ const getCurrencies = async (req, res) => {
   res.json(currencies);
 }
 
-module.exports = {test, getCurrencies, deleteCurrencies}
+module.exports = {test, getCurrencies, deleteAll}
