@@ -1,6 +1,6 @@
 "use strict";
-require('dotenv').config();
-const mongoose = require('mongoose');
+require("dotenv").config();
+const mongoose = require("mongoose");
 const log = require("../middleware/log.js");
 
 const { MONGO_URL } = process.env;
@@ -30,9 +30,10 @@ const connectMongoose = async () => {
 connectMongoose();
 
 module.exports = {
-  User: require('./user'),
-  Message: require('./message'),
-  TransactionAccount: require('./TransactionAccount'),
-  Transaction: require('./Transaction'),
-  Currency: require('./Currency')
+  User: require("./user"),
+  Message: require("./message"),
+  TransactionAccount: require("./TransactionAccount"),
+  Transaction: require("./Transaction"),
+  Currency: require("./Currency"),
+  Stock: require("./Stock")
 };
