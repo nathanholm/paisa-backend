@@ -30,6 +30,6 @@ app.use("/api/transaction-accounts", routes.transactionAccount);
 app.use("/api/currencies", routes.currency);
 
 // Server
-const server = app.listen(PORT, () => console.log(chalk`\n{blue ${app.get("title")}} | Running on port ${PORT}.\n`));
+const server = app.listen(PORT, () => console.log(chalk`\n{blue ${app.get("title")}} | Running on port ${PORT}`));
 
 module.exports = server;
