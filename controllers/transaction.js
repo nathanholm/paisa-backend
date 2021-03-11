@@ -6,12 +6,12 @@ const log = require("../middleware/log");
 
 // Controllers
 const test = (req, res) => {
-    res.json({ message: "Endpoint Valid: Currencies" });
+    res.json({ message: "Endpoint Valid: Transactions" });
 }
 
 const deleteAll = async (req, res) => {
   try {
-    const emptyCollection = await db.Currency.deleteMany({});
+    const emptyCollection = await db.Transaction.deleteMany({});
     res.json(emptyCollection);
   } catch (error) {
     console.log(error)
@@ -19,10 +19,10 @@ const deleteAll = async (req, res) => {
 }
 
 const getAll = async (req, res) => {
-  const currencies = await db.Currency.find();
+  const transactions = await db.Transaction.find();
   
-  console.log(currencies);
-  res.json(currencies);
+  console.log(transactions);
+  res.json(transactions);
 }
 
 module.exports = {test, getAll, deleteAll}
