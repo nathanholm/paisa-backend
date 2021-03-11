@@ -1,13 +1,16 @@
 // Imports
-require('dotenv').config()
-const express = require('express');
-const routes = require('./routes');
-const cors = require('cors');
-const passport = require('passport');
-require('./config/passport')(passport);
+require("dotenv").config()
+const express = require("express");
+const routes = require("./routes");
+const cors = require("cors");
+const passport = require("passport");
+const chalk = require("chalk");
+require("./config/passport")(passport);
 
 // App Set up
 const app = express();
+app.set("title", "Paisa API Server");
+
 const PORT = process.env.PORT || 8000;
 
 // Middleware
@@ -16,18 +19,17 @@ app.use(express.json()); // JSON parsing
 app.use(cors()); // allow all CORS requests
 app.use(passport.initialize());
 
-
-
 // API Routes
-app.get('/api/', (req, res) => {
-  res.json({ name: 'MERN Auth API', greeting: 'Welcome to the our API', author: 'YOU', message: "Smile, you are being watched by the Backend Engineering Team" });
+app.get("/api/", (req, res) => {
+  res.json({ name: "Paisa API Server", author: "Ana Ceprnja, Nathan Holm, Swati Makhija", message: "" });
 });
 
-app.use('/api/users', routes.user);
-app.use('/api/messages', routes.message);
-app.use('/api/transaction-accounts', routes.transactionAccount);
+app.use("/api/users", routes.user);
+app.use("/api/messages", routes.message);
+app.use("/api/transaction-accounts", routes.transactionAccount);
+app.use("/api/currencies", routes.currency);
 
 // Server
-const server = app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
+const server = app.listen(PORT, () => console.log(chalk`\n{blue ${app.get("title")}} | Running on port ${PORT}.\n`));
 
 module.exports = server;

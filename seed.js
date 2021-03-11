@@ -48,21 +48,25 @@ const addOneCurrency = async  () => {
 // https://www.localeplanet.com
 const getCurrencies = async () => {
   try {
-    const currenciesData = await axios.get("https://www.localeplanet.com/api/auto/currencymap.json");
+    const localePlanetURL = "https://www.localeplanet.com/api/auto/currencymap.json?name=y";
+    const currenciesData = await axios.get(localePlanetURL);
       const currencies = Object.keys(currenciesData.data).map((currency) => {
-        const { code, symbol, symbol_native, decimal_digits, rounding } = currenciesData.data[currency];
-         
-        return { _id: code, symbol, symbol_native, decimal_digits, rounding };
+        const { name, name_plural, code, symbol, symbol_native, decimal_digits, rounding } = currenciesData.data[currency];
+        
+        return { name, name_plural, code, symbol, symbol_native, decimal_digits, rounding };
       });
       
       try {
-        console.log(db)
         const savedCurrencies = await db.Currency.insertMany(currencies)
+        console.log(savedCurrencies);
+        process.exit() // Exit Node.js
       } catch (error) {
         console.log(error.message);
+        process.exit(1) // Exit Node.js
       }
     } catch (error) {
     console.log(error.message);
+    process.exit(1)
   }
 }
 
