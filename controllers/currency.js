@@ -20,8 +20,6 @@ const deleteAll = async (req, res) => {
 
 const getAll = async (req, res) => {
   const currencies = await db.Currency.find();
-  
-  console.log(currencies);
   res.json(currencies);
 }
 
