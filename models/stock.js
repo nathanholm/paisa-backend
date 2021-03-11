@@ -19,11 +19,13 @@ const StockSchema = new Schema({
     },
     price: Number,
     userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
   }
 });
+
+StockSchema.index({ ticker: 1, userId: 1 }, { unique: true })
 
 // Model
 const Stock = mongoose.model('Stock', StockSchema);
