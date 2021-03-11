@@ -2,19 +2,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const transactionAccountSchema = new Schema({
+  name: {
+    type: String,
+    trim: true,
+    required: true,
+    unique: false
+  },
   institution_name: {
     type: String,
     trim: true,
-  },
-  nickname: {
-    type: String,
-    trim: true,
-    validate: {
-      validator: function (nickname) {
-          return nickname || this.institution_name
-      },
-      message: 'You must provide a nickname or an Institution name.'
-    }
   },
   account_type: {
     type: String,
@@ -23,8 +19,7 @@ const transactionAccountSchema = new Schema({
     required: true
   },
   account_number: {
-    type: Number,
-    maxLength: 5
+    type: String
   },
   currency: {
     type: mongoose.Schema.Types.ObjectId,
@@ -37,9 +32,13 @@ const transactionAccountSchema = new Schema({
   },
   belongs_to: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true,
+    unique: false
   },
 });
+
+transactionAccountSchema.index({ name: 1, belongs_to: 1 }, { unique: true })
 
 const TransactionAccount = mongoose.model('TransactionAccount', transactionAccountSchema);
 

@@ -12,12 +12,12 @@ const test = (req, res) => {
 const create = async ( req, res ) => {
   try {
     // Destructure submitted form data
-    const { institutionName, nickname, accountType, accountNumber, currency } = req.body;
+    const { institutionName, name, accountType, accountNumber, currency } = req.body;
     
     // Create a new Transaction Account document
     const newTransactionAccount = await new db.TransactionAccount({
       institution_name: institutionName,
-      nickname: nickname,
+      name: name,
       account_type: accountType,
       account_number: accountNumber,
       currency: currency,
@@ -48,7 +48,27 @@ const create = async ( req, res ) => {
   }
 }
 
+const deleteAll = async ( req, res ) => {
+  try {
+    const emptyCollection = await db.TransactionAccount.deleteMany({});
+    
+    // Log success
+    const message = {
+      name: "Delete All",
+      message: `${emptyCollection.deletedCount} documents successfully deleted.`,
+      where: "Transaction Account Database"
+    }
+    log.success({...message});
+    
+    res.json(emptyCollection);
+  } catch (error) {
+    log.error({name, message, where: "Transaction Account Database"});
+    res.status(400).json([ { name, message } ]);
+  }
+}
+
 module.exports = {
   test,
-  create
+  create,
+  deleteAll
 }
