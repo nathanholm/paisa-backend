@@ -4,7 +4,7 @@ const ctrl = require("../controllers");
 const passport = require("passport");
 
 router.get("/test", ctrl.transactionAccount.test);
-router.post("/create", passport.authenticate("jwt", { session: false }), ctrl.transactionAccount.create);
+router.post("/", passport.authenticate("jwt", { session: false }), ctrl.transactionAccount.create);
 router.delete("/delete/all", ctrl.transactionAccount.deleteAll);
 
 module.exports = router;

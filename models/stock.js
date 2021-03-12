@@ -4,10 +4,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 // Model
-const StockSchema = new Schema({
+const CategorySchema = new Schema({
     ticker: {
       type: String,
-      required: true
+      required: true,
+      unique: false
     },
     name: {
       type: String,
@@ -21,13 +22,14 @@ const StockSchema = new Schema({
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
-  }
+      required: true,
+      unique: false
+    }
 });
 
-StockSchema.index({ ticker: 1, userId: 1 }, { unique: true })
+CategorySchema.index({ ticker: 1, userId: 1 }, { unique: true })
 
 // Model
-const Stock = mongoose.model('Stock', StockSchema);
+const Category = mongoose.model('Category', CategorySchema);
 
-module.exports = Stock;
+module.exports = Category;
