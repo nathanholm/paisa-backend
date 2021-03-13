@@ -75,6 +75,34 @@ const getOne = async (req, res) => {
   }
 };
 
+// GET ROUTE: /currencies/usd
+// Find a U.S. Dollar Currency document by code "USD"
+const getUSD = async (req, res) => {
+  const where = "GET /currencies/usd";
+  try {
+    const currency = await db.Currency.findOne({
+      code: "USD"
+    });
+    // Log success message and route location
+    const successMessage = {
+      name: currency._id,
+      message: `${currency.code}: ${currency.name}`,
+      where
+    }
+    log.success(successMessage);
+    
+    // Return result as JSON Object
+    res.json(currency);
+    
+  } catch (error) {
+    // Log error message(s) and route location
+    const errorList = log.mongooseErrors(error, where);
+    
+    // Return error message(s) as JSON Object
+    res.status(400).json(errorList);
+  }
+};
+
 // POST ROUTE: /currencies
 // Create a Currency document from posted form body
 const createOne = async (req, res) => {
@@ -104,7 +132,6 @@ const createOne = async (req, res) => {
 // PUT ROUTE: /currencies/:id
 // Update a Currency document by ID
 const updateOne = async (req, res) => {
-  console.log("PUT UPDATE")
   const where = "UPDATE /currencies/:id";
   try {
     const currency = await db.Currency.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -177,4 +204,13 @@ const deleteAll = async (req, res) => {
   }
 }
 
-module.exports = {test, getAll, deleteAll, getOne, createOne, deleteOne, updateOne}
+module.exports = {
+  test,
+  getAll,
+  deleteAll,
+  getOne,
+  createOne,
+  deleteOne,
+  updateOne,
+  getUSD
+}

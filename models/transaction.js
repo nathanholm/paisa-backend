@@ -45,7 +45,8 @@ const TransactionSchema = new Schema({
   },
   account: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "TransactionAccount"
+    ref: "TransactionAccount",
+    required: true
   },
 });
 
