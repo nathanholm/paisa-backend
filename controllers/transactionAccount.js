@@ -134,6 +134,33 @@ const createOne = async ( req, res ) => {
   }
 }
 
+// POST ROUTE: /transaction-accounts/:id
+// Create a Transaction Accounts document from posted form body
+const insertManyByAccount = async ( req, res ) => {
+  const where = "POST /transaction-accounts/:id"
+  console.log(req.body)
+  try {
+    const transactionAccount = await db.TransactionAccount.insertMany(req.body);
+    // Log success message and route location
+    const successMessage = {
+      name: transactionAccount._id,
+      message: `Inserted ${transactionAccount.length} ${transactionAccount.length === 1 ? "transaction" : "transactions"} to Account: ${transactionAccount.name}`,
+      where
+    }
+    log.success(successMessage);
+    
+    // Return result as JSON Object
+    res.json(transactionAccount);
+    
+  } catch (error) {
+    // Log error message(s) and route location
+    const errorList = log.mongooseErrors(error, where);
+    
+    // Return error message(s) as JSON Object
+    res.status(400).json(errorList);
+  }
+}
+
 // PUT ROUTE: /transaction-accounts/:id
 // Update a Transaction Account document by ID
 const updateOne = async (req, res) => {
@@ -217,5 +244,6 @@ module.exports = {
   createOne,
   deleteOne,
   updateOne,
-  getTransactionsByAccount
+  getTransactionsByAccount,
+  insertManyByAccount
 }
