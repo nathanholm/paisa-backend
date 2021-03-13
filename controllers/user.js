@@ -4,6 +4,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
+const log = require("../middleware/log"); // Console log formatter
 
 // Database
 const db = require('../models');
@@ -11,6 +12,34 @@ const db = require('../models');
 // Controllers
 const test = (req, res) => {
     res.json({ message: "Endpoint Valid: Users" });
+}
+
+// GET ROUTE: /users/transaction-accounts
+// Find all transactionAccount documents by Current User
+const getTransactionAccounts = async (req, res) => {
+  const where = "GET /users/transaction-accounts";
+  try {
+    const transactionAccount = await db.TransactionAccount.find({
+        belongs_to: req.user._id
+    });
+    // Log success message and route location
+    const successMessage = {
+      name: `Found ${transactionAccount.length}`,
+      message: "Transaction Accounts returned to requester as JSON",
+      where
+    }
+    log.success(successMessage);
+    
+    // Return result as JSON Object
+    res.json(transactionAccount);
+    
+  } catch (error) {
+    // Log error message(s) and route location
+    const errorList = log.mongooseErrors(error, where);
+    
+    // Return error message(s) as JSON Object
+    res.status(400).json(errorList);
+  }
 }
 
 
@@ -123,4 +152,5 @@ module.exports = {
     login,
     profile,
     messages,
+    getTransactionAccounts
 }
