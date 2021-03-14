@@ -53,21 +53,30 @@ const getAll = async (req, res) => {
 // Find all Transaction documents by Transaction Account
 const getTransactionsByAccount = async (req, res) => {
   const where = "GET /transaction-accounts/:id/transactions";
+  const { id } = req.params.id;
   try {
+    
+    // Get transactions
     const transactions = await db.Transaction.find({
-      account: req.params.id
-    }).populate("account");
+      account: id
+    });
+    
+    // Get Transaction Account
+    // Alternative to populating from transactions,
+    // (If there are no matching transactions; an empty array is returned,
+    // and no account information is available)
+    const account = await db.TransactionAccount.findById(req.params.id);
     
     // Log success message and route location
     const successMessage = {
       name: `Found ${transactions.length} Transactions`,
-      message: `Account: ${transactions[0].account.name}`,
+      message: `Account: ${account.name}`,
       where
     }
     log.success(successMessage);
     
-    // Return result as JSON Object
-    res.json(transactions);
+    // Return results as JSON Object
+    res.status(200).json({transactions, account});
     
   } catch (error) {
     // Log error message(s) and route location
