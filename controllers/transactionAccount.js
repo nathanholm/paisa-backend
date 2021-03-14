@@ -65,7 +65,7 @@ const getTransactionsByAccount = async (req, res) => {
     // Alternative to populating from transactions,
     // (If there are no matching transactions; an empty array is returned,
     // and no account information is available)
-    const account = await db.TransactionAccount.findById(req.params.id);
+    const account = await db.TransactionAccount.findById(req.params.id).populate("currency");
     
     // Log success message and route location
     const successMessage = {
