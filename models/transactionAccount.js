@@ -26,6 +26,10 @@ const transactionAccountSchema = new Schema({
     ref: "Currency",
     required: true
   },
+  balance: {
+    type: Number,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now()

@@ -18,6 +18,7 @@ const test = (req, res) => {
 // Find all transactionAccount documents by Current User
 const getTransactionAccounts = async (req, res) => {
   const where = "GET /users/transaction-accounts";
+        console.log("REQ.USER._ID---------------", req.user._id)
   try {
     const transactionAccount = await db.TransactionAccount.find({
         belongs_to: req.user._id
