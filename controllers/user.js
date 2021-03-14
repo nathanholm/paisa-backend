@@ -18,11 +18,11 @@ const test = (req, res) => {
 // Find all transactionAccount documents by Current User
 const getTransactionAccounts = async (req, res) => {
   const where = "GET /users/transaction-accounts";
-        console.log("REQ.USER._ID---------------", req.user._id)
   try {
+    // Get Transaction Accounts and populate related Currency information
     const transactionAccount = await db.TransactionAccount.find({
         belongs_to: req.user._id
-    });
+    }).populate("currency");
     // Log success message and route location
     const successMessage = {
       name: `Found ${transactionAccount.length}`,
