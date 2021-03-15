@@ -31,9 +31,11 @@ const TransactionSchema = new Schema({
     enum: ["income", "expense", "transfer"],
     required: true
   },
+  image_url: {
+    type: String
+  },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category"
+    type: String
   },
   memo: {
     type: String,
