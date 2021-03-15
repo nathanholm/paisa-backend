@@ -14,7 +14,7 @@ const TransactionSchema = new Schema({
   currency: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Currency",
-    required: true
+    required: false
   },
   exchange_rate: {
     type: Number,
@@ -23,7 +23,8 @@ const TransactionSchema = new Schema({
           return this.currency._id === this.account.currency._id
       },
       message: "Exchange Rate must be provided for transactions in a foreign currency."
-    }
+    },
+    required: false
   },
   type: {
     type: String,
@@ -46,7 +47,7 @@ const TransactionSchema = new Schema({
   account: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "TransactionAccount",
-    required: true
+    required: false
   },
 });
 

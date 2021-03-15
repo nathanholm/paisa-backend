@@ -30,6 +30,8 @@ app.use("/api/transaction-accounts", routes.transactionAccount);
 app.use("/api/currencies", routes.currency);
 app.use("/api/transactions", routes.transaction);
 app.use("/api/stocks", routes.stock);
+app.use("/api/accounts", routes.accountUpdater);
+
 
 // Server
 const server = app.listen(PORT, () => console.log(chalk`\n{blue ${app.get("title")}} | Running on port ${PORT}`));

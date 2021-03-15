@@ -10,5 +10,6 @@ router.post("/", ctrl.transaction.createOne);
 router.put("/:id", ctrl.transaction.updateOne);
 router.delete("/delete-all", ctrl.transaction.deleteAll);
 router.delete("/:id", ctrl.transaction.deleteOne);
+router.post("/:id/update-account", ctrl.accountUpdater.updateAccount)
 
 module.exports = router;

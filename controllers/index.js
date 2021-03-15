@@ -4,5 +4,6 @@ module.exports = {
   transactionAccount: require("./transactionAccount"),
   currency: require("./currency"),
   transaction: require("./transaction"),
-  stock: require("./stock")
+  stock: require("./stock"),
+  accountUpdater: require("./accountUpdateHandler")
 }
