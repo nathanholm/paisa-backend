@@ -34,8 +34,7 @@ const TransactionSchema = new Schema({
     type: String
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category"
+    type: String
   },
   memo: {
     type: String,

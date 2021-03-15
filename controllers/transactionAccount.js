@@ -59,7 +59,7 @@ const getTransactionsByAccount = async (req, res) => {
     // Get transactions
     const transactions = await db.Transaction.find({
       account: id
-    });
+    }).populate("currency");
     
     // Get Transaction Account
     // Alternative to populating from transactions,
