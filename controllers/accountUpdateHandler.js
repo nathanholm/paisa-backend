@@ -19,7 +19,7 @@ const updateAccount = async ( req, res ) => {
             // currency: req.body.currency,
             exchange_rate: req.body.exchange_rate,
             type: req.body.type,
-            // category : req.body.category,
+            category : req.body.category,
             memo : req.body.memo,
             transactionDate : req.body.date,
             //account: req.body.account
